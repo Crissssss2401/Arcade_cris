@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijera</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .game-area {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .choice-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            font-size: 4em;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .choice-btn:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .choice-btn:active {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .battle-area {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .player-choice, .computer-choice {
+            text-align: center;
+        }
+
+        .choice-display {
+            font-size: 6em;
+            margin: 20px 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .choice-label {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .vs {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .result-message {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 30px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-message.win {
+            color: #4caf50;
+        }
+
+        .result-message.lose {
+            color: #f44336;
+        }
+
+        .result-message.tie {
+            color: #ff9800;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .score-item {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .score-label {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        .score-value {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .score-item.player .score-value {
+            color: #4caf50;
+        }
+
+        .score-item.computer .score-value {
+            color: #f44336;
+        }
+
+        .score-item.ties .score-value {
+            color: #ff9800;
+        }
+
+        @media (max-width: 768px) {
+            .choice-btn {
+                width: 90px;
+                height: 90px;
+                font-size: 3em;
+            }
+
+            .choice-display {
+                font-size: 4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+        
+        <div class="game-header">
+            <h1>✊ Piedra, Papel o Tijera</h1>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instrucciones:</h3>
+            <p><strong>Piedra</strong> gana a <strong>Tijera</strong> | <strong>Tijera</strong> gana a <strong>Papel</strong> | <strong>Papel</strong> gana a <strong>Piedra</strong></p>
+            <p>Selecciona tu jugada y compite contra la computadora. ¡El primero en llegar a 5 victorias gana!</p>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item player">
+                <div class="score-label">🎮 Jugador</div>
+                <div class="score-value" id="playerScore">0</div>
+            </div>
+            <div class="score-item ties">
+                <div class="score-label">🤝 Empates</div>
+                <div class="score-value" id="tiesScore">0</div>
+            </div>
+            <div class="score-item computer">
+                <div class="score-label">🤖 Computadora</div>
+                <div class="score-value" id="computerScore">0</div>
+            </div>
+        </div>
+
+        <div class="choices">
+            <button class="choice-btn" onclick="play('piedra')" title="Piedra">✊</button>
+            <button class="choice-btn" onclick="play('papel')" title="Papel">✋</button>
+            <button class="choice-btn" onclick="play('tijera')" title="Tijera">✌️</button>
+        </div>
+
+        <div class="battle-area" id="battleArea" style="display: none;">
+            <div class="player-choice">
+                <div class="choice-label">Tu Elección</div>
+                <div class="choice-display" id="playerChoice"></div>
+            </div>
+            <div class="vs">VS</div>
+            <div class="computer-choice">
+                <div class="choice-label">Computadora</div>
+                <div class="choice-display" id="computerChoice"></div>
+            </div>
+        </div>
+
+        <div class="result-message" id="resultMessage"></div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="resetGame()">🔄 Reiniciar Puntuación</button>
+        </div>
+    </div>
+
+    <script src="piedra-papel-tijera.js"></script>
+</body>
+</html>
