@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            color: white;
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card.flipped {
+            background: white;
+            border: 3px solid #667eea;
+        }
+
+        .memory-card.matched {
+            background: #4caf50;
+            cursor: default;
+            animation: matchAnimation 0.5s;
+        }
+
+        .memory-card:not(.flipped) {
+            color: transparent;
+        }
+
+        @keyframes matchAnimation {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .message {
+            text-align: center;
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 20px 0;
+            min-height: 40px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .memory-grid {
+                max-width: 350px;
+            }
+
+            .memory-card {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+        
+        <div class="game-header">
+            <h1>🧠 Juego de Memoria</h1>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instrucciones:</h3>
+            <p>Encuentra todos los pares de emojis iguales. Haz clic en las cartas para voltearlas y recuerda dónde están ubicadas. ¡Intenta completar el juego con el menor número de intentos!</p>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat">
+                <div class="stat-label">Intentos</div>
+                <div class="stat-value" id="attempts">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Pares Encontrados</div>
+                <div class="stat-value" id="pairs">0 / 8</div>
+            </div>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <div class="memory-grid" id="memoryGrid"></div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="resetGame()">🔄 Nuevo Juego</button>
+        </div>
+    </div>
+
+    <script src="memoria.js"></script>
+</body>
+</html>
