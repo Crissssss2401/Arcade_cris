@@ -1,0 +1,224 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+/* Grid de juegos */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.game-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px;
+    padding: 30px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.game-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.game-icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+}
+
+.game-card h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.game-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.play-btn {
+    background: white;
+    color: #667eea;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+    transition: transform 0.2s;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Botón de regreso */
+.back-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background: #764ba2;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: #999;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Estilos para pantallas de juego */
+.game-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-header h1 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.instructions {
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.instructions h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    background: #f8f9fa;
+    padding: 15px 25px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    color: #667eea;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Botones de acción */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #764ba2;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #667eea;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+}
